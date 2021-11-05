@@ -1,0 +1,10 @@
+plugins {
+    id 'java-library'
+}
+
+group   = properties.group
+version = properties.version
+
+repositories {
+    mavenCentral()
+}
