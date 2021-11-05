@@ -16,13 +16,13 @@ import java.util.List;
 public interface EventBus<Configuration, Audience extends EventAudience> {
 
     /**
-     * Returns a new {@link EventBus.Builder} instance.
+     * Returns a new {@link Builder} instance.
      *
      * @param <Configuration> the configuration type
      * @param <Audience> the audience type
      * @return the builder
      */
-    static EventBus.Builder builder() {
+    static Builder builder() {
         return Hermes.factory()
                 .map(Hermes::busBuilder)
                 .orElseThrow(Hermes.NotInitializedException::new);

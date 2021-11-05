@@ -1,10 +1,2 @@
-plugins {
-    id 'java-library'
-}
-
-group 'fr.shyrogan'
-version '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
+group   = properties.group
+version = properties.version

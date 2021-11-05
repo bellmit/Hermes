@@ -12,11 +12,11 @@ import java.util.List;
 public interface EventAudience {
 
     /**
-     * Returns a new {@link EventAudience.Builder} instance.
+     * Returns a new {@link Builder} instance.
      *
      * @return the builder
      */
-    static EventAudience.Builder audienceBuilder() {
+    static Builder audienceBuilder() {
         return Hermes.factory()
                 .map(Hermes::audienceBuilder)
                 .orElseThrow(Hermes.NotInitializedException::new);
