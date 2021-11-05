@@ -15,7 +15,7 @@ public interface MutableEventAudience extends EventAudience {
      * @param listener the listener
      * @return the audience
      */
-    MutableEventAudience add(Listener listener);
+    MutableEventAudience subscribe(Listener listener);
 
     /**
      * Adds each listener in given iterable to this audience.
@@ -23,7 +23,7 @@ public interface MutableEventAudience extends EventAudience {
      * @param listeners the listeners
      * @return the audience
      */
-    MutableEventAudience add(Iterable<? extends Listener> listeners);
+    MutableEventAudience subscribe(Iterable<? extends Listener> listeners);
 
     /**
      * Adds each listener in given array to this audience.
@@ -31,8 +31,8 @@ public interface MutableEventAudience extends EventAudience {
      * @param listeners the listeners
      * @return the audience
      */
-    default MutableEventAudience add(Listener... listeners) {
-        return add(List.of(listeners));
+    default MutableEventAudience subscribe(Listener... listeners) {
+        return subscribe(List.of(listeners));
     }
 
     /**
@@ -41,7 +41,7 @@ public interface MutableEventAudience extends EventAudience {
      * @param listener the listener
      * @return the audience
      */
-    MutableEventAudience remove(Listener listener);
+    MutableEventAudience unsubscribe(Listener listener);
 
     /**
      * Removes each listener in given iterable to this audience.
@@ -49,7 +49,7 @@ public interface MutableEventAudience extends EventAudience {
      * @param listeners the listeners
      * @return the audience
      */
-    MutableEventAudience remove(Iterable<? extends Listener> listeners);
+    MutableEventAudience unsubscribe(Iterable<? extends Listener> listeners);
 
     /**
      * Removes each listener in given array to this audience.
@@ -57,8 +57,8 @@ public interface MutableEventAudience extends EventAudience {
      * @param listeners the listeners
      * @return the audience
      */
-    default MutableEventAudience remove(Listener... listeners) {
-        return add(List.of(listeners));
+    default MutableEventAudience unsubscribe(Listener... listeners) {
+        return subscribe(List.of(listeners));
     }
 
 }
