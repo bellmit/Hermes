@@ -1,2 +1,33 @@
 group   = properties.group
 version = properties.version
+
+final maven_user = properties.dualis_maven_user
+final maven_pswrd = properties.dualis_maven_pswrd
+
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+
+    group   = properties.group
+    version = properties.version
+
+    publishing {
+        repositories {
+            maven {
+                name "dualis-releases"
+                url "http://maven.dualis.games/releases"
+
+                allowInsecureProtocol = true
+
+                credentials.username = maven_user
+                credentials.password = maven_pswrd
+            }
+        }
+        publications {
+            maven(MavenPublication) {
+                artifactId = "${parent.name.toLowerCase()}-${project.name.toLowerCase()}"
+                from components.java
+            }
+        }
+    }
+}

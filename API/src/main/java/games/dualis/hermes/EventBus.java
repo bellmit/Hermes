@@ -1,9 +1,12 @@
 package games.dualis.hermes;
 
+import games.dualis.hermes.api.Hermes;
 import games.dualis.hermes.audience.EventAudience;
 import games.dualis.hermes.audience.MutableEventAudience;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * An immutable object able to work with multiple event topics.
@@ -13,7 +16,7 @@ import java.util.List;
  *
  * @param <Audience> the audience type
  */
-public interface EventBus<Configuration, Audience extends EventAudience> {
+public interface EventBus<Audience extends EventAudience> {
 
     /**
      * Returns a new {@link Builder} instance.
@@ -33,7 +36,17 @@ public interface EventBus<Configuration, Audience extends EventAudience> {
      *
      * @return the configuration
      */
-    EventBus.Configuration<Configuration> configuration();
+    <T> EventBus.Configuration<T> configuration();
+
+    /**
+     * Returns the topics listed by this {@link EventBus}.
+     *
+     * <p>If a topic is contained by this collection, that means there's an audience
+     * for it.</p>
+     *
+     * @return the topics
+     */
+    Set<Class<?>> topics();
 
     /**
      * Returns the audience for a given topic.
@@ -46,12 +59,23 @@ public interface EventBus<Configuration, Audience extends EventAudience> {
      */
     Audience audience(Class<?> topic);
 
+    default void dispatch(Object event) {
+        audience(event.getClass()).dispatch(event);
+    }
+
     /**
      * An object used to configure the bus.
      *
      * @param <T> the configuration type
      */
     interface Configuration<T> {
+        /**
+         * Returns the id of this bus.
+         *
+         * @return the id
+         */
+        String id();
+
         /**
          * Defines the id of this bus.
          *
@@ -60,19 +84,6 @@ public interface EventBus<Configuration, Audience extends EventAudience> {
          * @return the id.
          */
         T id(String id);
-
-        /**
-         * Defines the {@link ClassLoader} used to define new classes.
-         *
-         * <p>A lot of implementations will inject classes compiled at runtime in
-         * the class loader. Some environments require to use specific class loaders.</p>
-         *
-         * <p>In some cases, this might no be used.</p>
-         *
-         * @param loader the loader
-         * @return the configuration
-         */
-        T loader(ClassLoader loader);
     }
 
     /**
@@ -81,23 +92,23 @@ public interface EventBus<Configuration, Audience extends EventAudience> {
      * @see EventBus
      */
     interface Builder {
-        <T> Builder configuration(EventBus.Configuration<T> configuration);
+        List<EventAudience> audiences();
         Builder with(EventAudience audience);
-        Builder with(Iterable<? extends EventAudience> audiences);
+        Builder with(Collection<EventAudience> audiences);
         default Builder with(EventAudience... audiences) {
             return with(List.of(audiences));
         }
 
         @SuppressWarnings("unchecked")
-        default <Configuration, Audience extends EventAudience> EventBus<Configuration, Audience> immutable() {
-            return (EventBus<Configuration, Audience>) Hermes.factory()
+        default <Audience extends EventAudience> EventBus<Audience> immutable() {
+            return (EventBus<Audience>) Hermes.factory()
                     .map(f -> f.immutable(this))
                     .orElseThrow(Hermes.NotInitializedException::new);
         }
 
         @SuppressWarnings("unchecked")
-        default <Configuration, Audience extends MutableEventAudience> MutableEventBus<Configuration, Audience> mutable() {
-            return (MutableEventBus<Configuration, Audience>) Hermes.factory()
+        default <Audience extends MutableEventAudience> MutableEventBus<Audience> mutable() {
+            return (MutableEventBus<Audience>) Hermes.factory()
                     .map(f -> f.mutable(this))
                     .orElseThrow(Hermes.NotInitializedException::new);
         }

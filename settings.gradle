@@ -1,3 +1,4 @@
 rootProject.name = 'Hermes'
-include 'API'
+
+include('API', 'Hippo')
 

@@ -1,5 +1,6 @@
 package games.dualis.hermes.listener.scout;
 
+import games.dualis.hermes.MutableEventBus;
 import games.dualis.hermes.listener.Listener;
 
 import java.util.List;
@@ -21,6 +22,6 @@ public interface ListenerScout {
      * @param object the object
      * @return the listeners
      */
-    List<Listener> scout(Object object);
+    List<Listener> scout(MutableEventBus.Configuration<?> config, Object object);
 
 }
