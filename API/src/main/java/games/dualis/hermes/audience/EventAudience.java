@@ -1,6 +1,6 @@
 package games.dualis.hermes.audience;
 
-import games.dualis.hermes.Hermes;
+import games.dualis.hermes.api.Hermes;
 import games.dualis.hermes.listener.Listener;
 
 import java.util.Collection;
@@ -58,9 +58,11 @@ public interface EventAudience {
      * @see EventAudience
      */
     interface Builder {
+        Class<?> topic();
         Builder topic(Class<?> topic);
+        Collection<Listener> listeners();
         Builder with(Listener listener);
-        Builder with(Iterable<? extends Listener> listeners);
+        Builder with(Collection<Listener> listeners);
         default Builder with(Listener... listeners) {
             return with(List.of(listeners));
         }

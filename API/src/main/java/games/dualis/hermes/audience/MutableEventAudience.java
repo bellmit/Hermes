@@ -2,6 +2,7 @@ package games.dualis.hermes.audience;
 
 import games.dualis.hermes.listener.Listener;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public interface MutableEventAudience extends EventAudience {
      * @param listeners the listeners
      * @return the audience
      */
-    MutableEventAudience subscribe(Iterable<? extends Listener> listeners);
+    MutableEventAudience subscribe(Collection<Listener> listeners);
 
     /**
      * Adds each listener in given array to this audience.
@@ -49,7 +50,7 @@ public interface MutableEventAudience extends EventAudience {
      * @param listeners the listeners
      * @return the audience
      */
-    MutableEventAudience unsubscribe(Iterable<? extends Listener> listeners);
+    MutableEventAudience unsubscribe(Collection<Listener> listeners);
 
     /**
      * Removes each listener in given array to this audience.

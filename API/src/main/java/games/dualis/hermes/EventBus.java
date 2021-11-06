@@ -1,5 +1,6 @@
 package games.dualis.hermes;
 
+import games.dualis.hermes.api.Hermes;
 import games.dualis.hermes.audience.EventAudience;
 import games.dualis.hermes.audience.MutableEventAudience;
 

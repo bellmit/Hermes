@@ -1,5 +1,7 @@
-package games.dualis.hermes;
+package games.dualis.hermes.api;
 
+import games.dualis.hermes.EventBus;
+import games.dualis.hermes.MutableEventBus;
 import games.dualis.hermes.audience.EventAudience;
 import games.dualis.hermes.audience.MutableEventAudience;
 
@@ -13,8 +15,10 @@ import java.util.Optional;
  */
 public interface Hermes {
 
-    /** The factory used by Hermes, see each implementation doc to set them. **/
-    Hermes factory = null;
+    static Hermes factory(Hermes factory) {
+        HermesLoader.factory = factory;
+        return factory;
+    }
 
     /**
      * Returns the {@link Hermes} wrapped in an optional.
@@ -22,7 +26,7 @@ public interface Hermes {
      * @return the hermes factory
      */
     static Optional<Hermes> factory() {
-        return Optional.ofNullable(factory);
+        return Optional.ofNullable(HermesLoader.factory);
     }
 
     /**
@@ -46,7 +50,7 @@ public interface Hermes {
      * @param builder the builder
      * @return the audience
      */
-    MutableEventAudience buildMutable(EventAudience.Builder builder);
+    MutableEventAudience mutable(EventAudience.Builder builder);
 
     /**
      * Returns a new {@link EventBus.Builder} instance.
