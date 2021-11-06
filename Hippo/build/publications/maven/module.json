@@ -1,0 +1,69 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "games.dualis",
+    "module": "hermes-hippo",
+    "version": "1.0-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "hermes-hippo-1.0-SNAPSHOT.jar",
+          "url": "hermes-hippo-1.0-SNAPSHOT.jar",
+          "size": 23139,
+          "sha512": "8aea33ed595eda9377e2834cebf0d4d9ae188586860c35429fc063c549127e413e17aaf347b5a934981c93174f9a35e6c40e52acb8ee1eb2dd421b26badd0654",
+          "sha256": "123cd83d2a35ecb4be3407cc2b5ece2cb0b4af8225b205170b91fc557d660d18",
+          "sha1": "5f68cfd844ea2492aa1c8e8dffc98ea77e02ef04",
+          "md5": "0f9a705c78a35ca4bb3d0fa8bbc74278"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "games.dualis",
+          "module": "hermes-api",
+          "version": {
+            "requires": "1.0-SNAPSHOT"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "hermes-hippo-1.0-SNAPSHOT.jar",
+          "url": "hermes-hippo-1.0-SNAPSHOT.jar",
+          "size": 23139,
+          "sha512": "8aea33ed595eda9377e2834cebf0d4d9ae188586860c35429fc063c549127e413e17aaf347b5a934981c93174f9a35e6c40e52acb8ee1eb2dd421b26badd0654",
+          "sha256": "123cd83d2a35ecb4be3407cc2b5ece2cb0b4af8225b205170b91fc557d660d18",
+          "sha1": "5f68cfd844ea2492aa1c8e8dffc98ea77e02ef04",
+          "md5": "0f9a705c78a35ca4bb3d0fa8bbc74278"
+        }
+      ]
+    }
+  ]
+}

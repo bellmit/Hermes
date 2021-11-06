@@ -33,10 +33,18 @@ public class MutableBusTest {
     public void busDispatch() {
         final var audience = bus.audience(String.class);
 
-        assertEquals(audience.listeners().size(), 1);
+        assertEquals(audience.listeners().size(), 2);
 
         audience.dispatch("Hello world");
         assertEquals(Listeners.text, "Hello world");
+    }
+
+    @Test
+    public void busPriority() {
+        final var audience = bus.audience(String.class);
+
+        audience.dispatch("Dope");
+        assertEquals(Listeners.text, "Not Dope");
     }
 
     @Test
@@ -45,9 +53,9 @@ public class MutableBusTest {
             bus.dispatch(2);
         }
 
-        for(int x = 0; x < 20; x++) {
+        for(int x = 0; x < 2; x++) {
             final var start = System.nanoTime();
-            for(int i = 0; i < 3_000_000; i++) {
+            for(int i = 0; i < 300_000_000; i++) {
                 bus.dispatch(2);
             }
             long finish = System.nanoTime();
@@ -63,6 +71,14 @@ public class MutableBusTest {
         public void onReceive(String text) {
             System.out.println("Received: " + text);
             Listeners.text = text;
+        }
+
+        @Listen(-2)
+        public void onReceiveSecond(String text) {
+            System.out.println("Received (-2): " + text);
+            if(text.equalsIgnoreCase("Dope")) {
+                Listeners.text = "Not " + text;
+            }
         }
 
         @Listen

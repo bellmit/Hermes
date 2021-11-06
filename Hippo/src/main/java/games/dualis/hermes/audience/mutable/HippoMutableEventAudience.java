@@ -38,7 +38,7 @@ public class HippoMutableEventAudience implements MutableEventAudience {
     public MutableEventAudience subscribe(Listener listener) {
         final var list = new ArrayList<>(List.of(this.listeners));
         list.add(listener);
-        list.sort(Comparator.comparingInt(Listener::priority));
+        list.sort(Comparator.comparingInt(l -> -l.priority()));
         listeners = list.toArray(Listener[]::new);
 
         return this;
@@ -48,7 +48,7 @@ public class HippoMutableEventAudience implements MutableEventAudience {
     public MutableEventAudience subscribe(Collection<Listener> listeners) {
         final var list = new ArrayList<>(List.of(this.listeners));
         list.addAll(listeners);
-        list.sort(Comparator.comparingInt(Listener::priority));
+        list.sort(Comparator.comparingInt(l -> -l.priority()));
         this.listeners = list.toArray(Listener[]::new);
 
         return this;
@@ -58,7 +58,7 @@ public class HippoMutableEventAudience implements MutableEventAudience {
     public MutableEventAudience unsubscribe(Listener listener) {
         final var list = new ArrayList<>(List.of(this.listeners));
         list.remove(listener);
-        list.sort(Comparator.comparingInt(Listener::priority));
+        list.sort(Comparator.comparingInt(l -> -l.priority()));
         listeners = list.toArray(Listener[]::new);
 
         return this;
@@ -68,7 +68,7 @@ public class HippoMutableEventAudience implements MutableEventAudience {
     public MutableEventAudience unsubscribe(Collection<Listener> listeners) {
         final var list = new ArrayList<>(List.of(this.listeners));
         list.removeAll(listeners);
-        list.sort(Comparator.comparingInt(Listener::priority));
+        list.sort(Comparator.comparingInt(l -> -l.priority()));
         this.listeners = list.toArray(Listener[]::new);
 
         return this;

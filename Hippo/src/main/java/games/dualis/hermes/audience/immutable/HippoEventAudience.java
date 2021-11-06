@@ -15,7 +15,7 @@ public class HippoEventAudience implements EventAudience {
 
     public HippoEventAudience(Class<?> topic, Listener[] listeners) {
         this.topic = topic;
-        Arrays.sort(listeners, Comparator.comparingInt(Listener::priority));
+        Arrays.sort(listeners, Comparator.comparingInt(l -> -l.priority()));
         this.listeners = listeners;
     }
 
