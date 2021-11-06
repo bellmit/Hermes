@@ -3,6 +3,7 @@ package games.dualis.hermes;
 import games.dualis.hermes.audience.MutableEventAudience;
 import games.dualis.hermes.listener.scout.ListenerScout;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -42,12 +43,51 @@ public interface MutableEventBus<Configuration, Audience extends MutableEventAud
      */
     interface Configuration<T> extends EventBus.Configuration<T> {
         /**
+         * Returns the {@link ClassLoader} used to define new classes.
+         *
+         * <p>A lot of implementations will inject classes compiled at runtime in
+         * the class loader. Some environments require to use specific class loaders.</p>
+         *
+         * <p>In some cases, this might no be used.</p>
+         *
+         * @return the loader
+         */
+        ClassLoader loader();
+
+        /**
+         * Defines the {@link ClassLoader} used to define new classes.
+         *
+         * <p>A lot of implementations will inject classes compiled at runtime in
+         * the class loader. Some environments require to use specific class loaders.</p>
+         *
+         * <p>In some cases, this might no be used.</p>
+         *
+         * @param loader the loader
+         * @return the configuration
+         */
+        T loader(ClassLoader loader);
+
+        /**
+         * Returns scout caching is enabled.
+         *
+         * @return whether caching is enabled
+         */
+        boolean cache();
+
+        /**
          * Enables scout caching, accelerating the process of subscription/unsubscription.
          *
          * @param value the value
          * @return the configuration
          */
         T cache(boolean value);
+
+        /**
+         * Returns the scouts used by the bus.
+         *
+         * @return the scouts
+         */
+        Collection<ListenerScout> scouts();
 
         /**
          * Defines the scout used by the bus.
@@ -63,7 +103,7 @@ public interface MutableEventBus<Configuration, Audience extends MutableEventAud
          * @param scouts the scouts
          * @return the configuration
          */
-        T scout(Iterable<? extends ListenerScout> scouts);
+        T scout(Collection<ListenerScout> scouts);
 
         /**
          * Defines the scouts used by the bus.

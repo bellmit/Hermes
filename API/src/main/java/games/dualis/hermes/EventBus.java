@@ -4,6 +4,7 @@ import games.dualis.hermes.api.Hermes;
 import games.dualis.hermes.audience.EventAudience;
 import games.dualis.hermes.audience.MutableEventAudience;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -54,6 +55,13 @@ public interface EventBus<Configuration, Audience extends EventAudience> {
      */
     interface Configuration<T> {
         /**
+         * Returns the id of this bus.
+         *
+         * @return the id
+         */
+        String id();
+
+        /**
          * Defines the id of this bus.
          *
          * <p>The ID is only used when logging yet is required for the library to work.</p>
@@ -61,19 +69,6 @@ public interface EventBus<Configuration, Audience extends EventAudience> {
          * @return the id.
          */
         T id(String id);
-
-        /**
-         * Defines the {@link ClassLoader} used to define new classes.
-         *
-         * <p>A lot of implementations will inject classes compiled at runtime in
-         * the class loader. Some environments require to use specific class loaders.</p>
-         *
-         * <p>In some cases, this might no be used.</p>
-         *
-         * @param loader the loader
-         * @return the configuration
-         */
-        T loader(ClassLoader loader);
     }
 
     /**
@@ -84,7 +79,7 @@ public interface EventBus<Configuration, Audience extends EventAudience> {
     interface Builder {
         <T> Builder configuration(EventBus.Configuration<T> configuration);
         Builder with(EventAudience audience);
-        Builder with(Iterable<? extends EventAudience> audiences);
+        Builder with(Collection<EventAudience> audiences);
         default Builder with(EventAudience... audiences) {
             return with(List.of(audiences));
         }

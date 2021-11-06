@@ -1,4 +1,4 @@
-package games.dualis.hermes.listener;
+package games.dualis.hermes.listener.invoker;
 
 /**
  * An object used to invoke a method in a given parent object.
@@ -13,5 +13,7 @@ public interface Invoker {
      * @param event the event
      */
     void invoke(Object parent, Object event);
+
+
 
 }
