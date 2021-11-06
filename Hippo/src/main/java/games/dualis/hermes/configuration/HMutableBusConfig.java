@@ -2,17 +2,18 @@ package games.dualis.hermes.configuration;
 
 import games.dualis.hermes.MutableEventBus;
 import games.dualis.hermes.listener.invoker.InvokerClassLoader;
+import games.dualis.hermes.listener.scout.CompiledListenerScout;
 import games.dualis.hermes.listener.scout.ListenerScout;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class HippoMutableBusConfiguration implements MutableEventBus.Configuration<HippoMutableBusConfiguration> {
+public class HMutableBusConfig implements MutableEventBus.Configuration<HMutableBusConfig> {
 
     private String id = "Hippo";
     private InvokerClassLoader loader = new InvokerClassLoader(this.getClass().getClassLoader());
-    private Collection<ListenerScout> scouts = Collections.emptyList();
+    private Collection<ListenerScout> scouts = List.of(CompiledListenerScout.SINGLETON);
 
     @Override
     public String id() {
@@ -20,7 +21,7 @@ public class HippoMutableBusConfiguration implements MutableEventBus.Configurati
     }
 
     @Override
-    public HippoMutableBusConfiguration id(String id) {
+    public HMutableBusConfig id(String id) {
         this.id = id;
         return this;
     }
@@ -31,7 +32,7 @@ public class HippoMutableBusConfiguration implements MutableEventBus.Configurati
     }
 
     @Override
-    public HippoMutableBusConfiguration loader(ClassLoader loader) {
+    public HMutableBusConfig loader(ClassLoader loader) {
         this.loader = new InvokerClassLoader(loader);
         return this;
     }
@@ -42,7 +43,7 @@ public class HippoMutableBusConfiguration implements MutableEventBus.Configurati
     }
 
     @Override
-    public HippoMutableBusConfiguration cache(boolean value) {
+    public HMutableBusConfig cache(boolean value) {
         return this;
     }
 
@@ -52,13 +53,13 @@ public class HippoMutableBusConfiguration implements MutableEventBus.Configurati
     }
 
     @Override
-    public HippoMutableBusConfiguration scout(ListenerScout scout) {
+    public HMutableBusConfig scout(ListenerScout scout) {
         this.scouts = List.of(scout);
         return this;
     }
 
     @Override
-    public HippoMutableBusConfiguration scout(Collection<ListenerScout> scouts) {
+    public HMutableBusConfig scout(Collection<ListenerScout> scouts) {
         this.scouts = scouts;
         return this;
     }

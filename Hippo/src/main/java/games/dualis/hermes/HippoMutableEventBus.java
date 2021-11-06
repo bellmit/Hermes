@@ -1,28 +1,33 @@
 package games.dualis.hermes;
 
-import games.dualis.hermes.audience.EventAudience;
 import games.dualis.hermes.audience.MutableEventAudience;
 import games.dualis.hermes.audience.mutable.HippoMutableEventAudience;
-import games.dualis.hermes.configuration.HippoMutableBusConfiguration;
+import games.dualis.hermes.configuration.HMutableBusConfig;
 import games.dualis.hermes.listener.Listener;
 
 import java.util.*;
 
 import static java.util.stream.Collectors.groupingBy;
 
-public class HippoMutableEventBus implements MutableEventBus<HippoMutableBusConfiguration, MutableEventAudience> {
+public class HippoMutableEventBus implements MutableEventBus<MutableEventAudience> {
 
     private final Map<Class<?>, MutableEventAudience> audiences;
-    private final HippoMutableBusConfiguration configuration = new HippoMutableBusConfiguration();
+    private final HMutableBusConfig configuration = new HMutableBusConfig();
     private final Cache cache = new Cache();
 
     public HippoMutableEventBus(Map<Class<?>, MutableEventAudience> audiences) {
         this.audiences = new HashMap<>(audiences);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public EventBus.Configuration<HippoMutableBusConfiguration> configuration() {
+    public EventBus.Configuration<HMutableBusConfig> configuration() {
         return configuration;
+    }
+
+    @Override
+    public Set<Class<?>> topics() {
+        return audiences.keySet();
     }
 
     @Override

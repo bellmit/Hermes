@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * An extension of {@link EventBus} which allows mutation of the audiences.
  */
-public interface MutableEventBus<Configuration, Audience extends MutableEventAudience> extends EventBus<Configuration, Audience> {
+public interface MutableEventBus<Audience extends MutableEventAudience> extends EventBus<Audience> {
 
     /**
      * Scouts given object using the listener scouts and subscribes the

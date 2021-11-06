@@ -33,7 +33,8 @@ public class HippoListener implements Listener {
         this.method = method;
 
         final var name = "lwjeb/generated/" + parent.getClass().getName().replace('.', '/') + "/" + getUniqueMethodName(method);
-        final var invokerClass = new InvokerClassFile(parent.getClass(), method.getParameterTypes()[1], method, name);
+        final var invokerClass = new InvokerClassFile(parent.getClass(), method.getParameterTypes()[0], method, name);
+
         try {
             final var clazz = loader.createClass(name.replace('/', '.'), invokerClass.toByteArray());
 

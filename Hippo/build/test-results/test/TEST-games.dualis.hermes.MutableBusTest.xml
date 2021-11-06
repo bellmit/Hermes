@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="games.dualis.hermes.MutableBusTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-06T18:39:59" hostname="macbook-pro-de-vial.home" time="0.661">
+  <properties/>
+  <testcase name="busBenchmark()" classname="games.dualis.hermes.MutableBusTest" time="0.661"/>
+  <system-out><![CDATA[Published 3 millions message in 22.722223ms
+Published 3 millions message in 60.365995999999996ms
+Published 3 millions message in 65.21727899999999ms
+Published 3 millions message in 21.09956ms
+Published 3 millions message in 10.322902ms
+Published 3 millions message in 10.276572999999999ms
+Published 3 millions message in 10.253499999999999ms
+Published 3 millions message in 10.36129ms
+Published 3 millions message in 10.523492ms
+Published 3 millions message in 10.197640999999999ms
+Published 3 millions message in 10.215480999999999ms
+Published 3 millions message in 10.344837ms
+Published 3 millions message in 10.198323ms
+Published 3 millions message in 10.915737ms
+Published 3 millions message in 10.474373ms
+Published 3 millions message in 10.301216ms
+Published 3 millions message in 10.285705ms
+Published 3 millions message in 10.406443ms
+Published 3 millions message in 10.270788ms
+Published 3 millions message in 10.226220999999999ms
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

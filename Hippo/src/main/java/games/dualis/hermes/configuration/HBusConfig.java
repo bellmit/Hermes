@@ -1,9 +1,8 @@
 package games.dualis.hermes.configuration;
 
 import games.dualis.hermes.EventBus;
-import games.dualis.hermes.listener.invoker.InvokerClassLoader;
 
-public class HippoBusConfiguration implements EventBus.Configuration<HippoBusConfiguration> {
+public class HBusConfig implements EventBus.Configuration<HBusConfig> {
 
     private String id = "Hippo";
 
@@ -13,7 +12,7 @@ public class HippoBusConfiguration implements EventBus.Configuration<HippoBusCon
     }
 
     @Override
-    public HippoBusConfiguration id(String id) {
+    public HBusConfig id(String id) {
         this.id = id;
         return this;
     }

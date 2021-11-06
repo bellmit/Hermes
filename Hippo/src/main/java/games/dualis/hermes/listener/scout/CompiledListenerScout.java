@@ -12,6 +12,17 @@ import java.util.List;
 
 public class CompiledListenerScout implements ListenerScout {
 
+    public static final CompiledListenerScout SINGLETON = new CompiledListenerScout();
+
+    CompiledListenerScout() {}
+
+    @Override
+    public List<Listener> scout(MutableEventBus.Configuration<?> configuration, Object object) {
+        return Arrays.stream(object.getClass().getDeclaredMethods())
+                .filter(m -> isCompilable(object, m))
+                .map(m -> compile(configuration.loader(), object, m))
+                .toList();
+    }
 
     private static boolean isCompilable(Object parent, Method method) {
         return method.isAnnotationPresent(Listen.class)
@@ -23,11 +34,4 @@ public class CompiledListenerScout implements ListenerScout {
         return new HippoListener(parent, method, (InvokerClassLoader) loader);
     }
 
-    @Override
-    public List<Listener> scout(MutableEventBus.Configuration<?> configuration, Object object) {
-        return Arrays.stream(object.getClass().getDeclaredMethods())
-                .filter(m -> isCompilable(object, m))
-                .map(m -> compile(configuration.loader(), object, m))
-                .toList();
-    }
 }

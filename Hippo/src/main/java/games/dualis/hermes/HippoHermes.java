@@ -77,8 +77,8 @@ public class HippoHermes implements Hermes {
      * @return A {@link EventBus}
      */
     @Override
-    public <Configuration, Audience extends EventAudience> EventBus<Configuration, Audience> immutable(EventBus.Builder builder) {
-        return (EventBus<Configuration, Audience>) new HippoEventBus(
+    public <Audience extends EventAudience> EventBus<Audience> immutable(EventBus.Builder builder) {
+        return (EventBus<Audience>) new HippoEventBus(
                 builder.audiences().stream()
                         .collect(Collectors.toMap(EventAudience::topic, v -> v))
         );
@@ -90,8 +90,8 @@ public class HippoHermes implements Hermes {
      * @return A {@link HippoMutableEventBus}
      */
     @Override
-    public <Configuration, Audience extends MutableEventAudience> MutableEventBus<Configuration, Audience> mutable(EventBus.Builder builder) {
-        return (MutableEventBus<Configuration, Audience>) new HippoMutableEventBus(
+    public <Configuration, Audience extends MutableEventAudience> MutableEventBus<Audience> mutable(EventBus.Builder builder) {
+        return (MutableEventBus<Audience>) new HippoMutableEventBus(
                 builder.audiences().stream()
                         .collect(Collectors.toMap(EventAudience::topic, v -> (MutableEventAudience)v))
         );

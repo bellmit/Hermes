@@ -65,7 +65,7 @@ public interface Hermes {
      * @param builder the builder
      * @return the audience
      */
-    <Configuration, Audience extends EventAudience> EventBus<Configuration, Audience> immutable(EventBus.Builder builder);
+    <Audience extends EventAudience> EventBus<Audience> immutable(EventBus.Builder builder);
 
 
     /**
@@ -74,7 +74,7 @@ public interface Hermes {
      * @param builder the builder
      * @return the audience
      */
-    <Configuration, Audience extends MutableEventAudience> MutableEventBus<Configuration, Audience> mutable(EventBus.Builder builder);
+    <Configuration, Audience extends MutableEventAudience> MutableEventBus<Audience> mutable(EventBus.Builder builder);
 
     /**
      * An exception thrown when {@link Hermes#factory} is not initialized.
