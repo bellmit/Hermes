@@ -6,6 +6,7 @@ import games.dualis.hermes.listener.Listener;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 
 public class HippoEventAudience implements EventAudience {
 
@@ -14,6 +15,7 @@ public class HippoEventAudience implements EventAudience {
 
     public HippoEventAudience(Class<?> topic, Listener[] listeners) {
         this.topic = topic;
+        Arrays.sort(listeners, Comparator.comparingInt(Listener::priority));
         this.listeners = listeners;
     }
 

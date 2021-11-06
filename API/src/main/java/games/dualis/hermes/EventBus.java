@@ -77,7 +77,7 @@ public interface EventBus<Configuration, Audience extends EventAudience> {
      * @see EventBus
      */
     interface Builder {
-        <T> Builder configuration(EventBus.Configuration<T> configuration);
+        List<EventAudience> audiences();
         Builder with(EventAudience audience);
         Builder with(Collection<EventAudience> audiences);
         default Builder with(EventAudience... audiences) {

@@ -1,5 +1,7 @@
 package games.dualis.hermes;
 
+import games.dualis.hermes.audience.EventAudience;
+import games.dualis.hermes.audience.MutableEventAudience;
 import games.dualis.hermes.audience.mutable.HippoMutableEventAudience;
 import games.dualis.hermes.configuration.HippoMutableBusConfiguration;
 import games.dualis.hermes.listener.Listener;
@@ -8,13 +10,13 @@ import java.util.*;
 
 import static java.util.stream.Collectors.groupingBy;
 
-public class HippoMutableEventBus implements MutableEventBus<HippoMutableBusConfiguration, HippoMutableEventAudience> {
+public class HippoMutableEventBus implements MutableEventBus<HippoMutableBusConfiguration, MutableEventAudience> {
 
-    private final Map<Class<?>, HippoMutableEventAudience> audiences;
+    private final Map<Class<?>, MutableEventAudience> audiences;
     private final HippoMutableBusConfiguration configuration = new HippoMutableBusConfiguration();
     private final Cache cache = new Cache();
 
-    public HippoMutableEventBus(Map<Class<?>, HippoMutableEventAudience> audiences) {
+    public HippoMutableEventBus(Map<Class<?>, MutableEventAudience> audiences) {
         this.audiences = new HashMap<>(audiences);
     }
 
@@ -24,7 +26,7 @@ public class HippoMutableEventBus implements MutableEventBus<HippoMutableBusConf
     }
 
     @Override
-    public HippoMutableEventAudience audience(Class<?> topic) {
+    public MutableEventAudience audience(Class<?> topic) {
         var audience = audiences.get(topic);
         if(audience == null) {
            audience = new HippoMutableEventAudience(topic, new Listener[]{});

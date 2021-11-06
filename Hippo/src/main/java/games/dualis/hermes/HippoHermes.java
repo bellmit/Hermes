@@ -8,6 +8,9 @@ import games.dualis.hermes.audience.immutable.HippoEventAudience;
 import games.dualis.hermes.audience.mutable.HippoMutableEventAudience;
 import games.dualis.hermes.listener.Listener;
 
+import java.util.stream.Collectors;
+
+@SuppressWarnings("unchecked")
 public class HippoHermes implements Hermes {
 
     private static final HippoHermes SINGLETON = new HippoHermes();
@@ -58,18 +61,39 @@ public class HippoHermes implements Hermes {
         );
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return A {@link HippoBusBuilder}
+     */
     @Override
     public EventBus.Builder busBuilder() {
-        return null;
+        return new HippoBusBuilder();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return A {@link EventBus}
+     */
     @Override
     public <Configuration, Audience extends EventAudience> EventBus<Configuration, Audience> immutable(EventBus.Builder builder) {
-        return null;
+        return (EventBus<Configuration, Audience>) new HippoEventBus(
+                builder.audiences().stream()
+                        .collect(Collectors.toMap(EventAudience::topic, v -> v))
+        );
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return A {@link HippoMutableEventBus}
+     */
     @Override
     public <Configuration, Audience extends MutableEventAudience> MutableEventBus<Configuration, Audience> mutable(EventBus.Builder builder) {
-        return null;
+        return (MutableEventBus<Configuration, Audience>) new HippoMutableEventBus(
+                builder.audiences().stream()
+                        .collect(Collectors.toMap(EventAudience::topic, v -> (MutableEventAudience)v))
+        );
     }
 }
