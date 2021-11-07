@@ -20,6 +20,13 @@ subprojects {
                 credentials.username = maven_user
                 credentials.password = maven_pswrd
             }
+            maven {
+                name "dualis-snapshots"
+                url "https://maven.dualis.games/snapshots"
+
+                credentials.username = maven_user
+                credentials.password = maven_pswrd
+            }
         }
         publications {
             maven(MavenPublication) {
