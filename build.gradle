@@ -15,9 +15,7 @@ subprojects {
         repositories {
             maven {
                 name "dualis-releases"
-                url "http://maven.dualis.games/releases"
-
-                allowInsecureProtocol = true
+                url "https://maven.dualis.games/releases"
 
                 credentials.username = maven_user
                 credentials.password = maven_pswrd
